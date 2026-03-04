@@ -12,7 +12,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
-  const { profile, loanStats, reviewsCount, isAuthenticated } = useSelector(
+  const { profile, isAuthenticated } = useSelector(
     (state: RootState) => state.auth,
   );
 

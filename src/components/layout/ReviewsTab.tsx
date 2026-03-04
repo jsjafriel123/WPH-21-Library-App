@@ -5,7 +5,7 @@ import { useAppSelector } from "@/app/hooks";
 export default function ReviewsTab() {
   const { isHydrated } = useAppSelector((state) => state.auth);
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
+  const { data } = useInfiniteQuery({
     queryKey: ["my-reviews"],
     queryFn: getMyReviews,
     initialPageParam: 1,

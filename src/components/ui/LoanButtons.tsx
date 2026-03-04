@@ -50,7 +50,7 @@ export default function LoanButtons({ book }: { book: any }) {
       return { previousCart };
     },
 
-    onError: (error: any, variables, context) => {
+    onError: (error: any, _variables, context) => {
       queryClient.setQueryData([QUERY_KEYS.CART], context?.previousCart);
       const message =
         error?.response?.data?.message || "Failed to add to basket";
@@ -110,7 +110,9 @@ export default function LoanButtons({ book }: { book: any }) {
                 onClick={() => handleBorrowNow()}
                 className="h-[40px] w-[174.5px] rounded-[100px] bg-primary-300 text-md font-bold text-neutral-25 shadow-[0px_0px_20px_0px_#CBCACA40] lg:h-[48px] lg:w-[200px]"
               >
-                {book.availableCopies === 0 ? "No available copy" : "Borrow Book"}
+                {book.availableCopies === 0
+                  ? "No available copy"
+                  : "Borrow Book"}
               </Button>
             </div>
           </TooltipTrigger>

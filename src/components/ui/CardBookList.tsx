@@ -1,6 +1,5 @@
 import type { Book } from "@/features/books/booksApi";
 import { Link } from "react-router-dom";
-import StarRating from "./StarRating";
 export default function CardBookList({ book }: { book: Book }) {
   return (
     <div className="h-[370px] w-[172px] rounded-xl bg-white shadow-[0px_0px_20px_0px_#CBCACA40] lg:h-[439.75px] lg:w-[204.75px]">

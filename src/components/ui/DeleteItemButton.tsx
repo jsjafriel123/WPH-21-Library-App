@@ -41,7 +41,7 @@ export default function DeleteItemButton({
       return { previousCart };
     },
 
-    onError: (err, itemId, context) => {
+    onError: (_err, _itemId, context) => {
       queryClient.setQueryData([QUERY_KEYS.CART], context?.previousCart);
     },
 

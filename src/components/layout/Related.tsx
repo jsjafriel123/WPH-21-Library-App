@@ -9,14 +9,7 @@ export default function RelatedBooks({
   bookId: number;
   categoryId: number;
 }) {
-  const {
-    data,
-    isLoading,
-    isError,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useBooks(categoryId, 10);
+  const { data, isLoading, isError } = useBooks(categoryId, 10);
 
   if (isLoading) toast("Loading...");
   if (isError) toast.error("Something went wrong.");

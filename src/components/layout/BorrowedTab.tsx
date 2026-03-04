@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { getMyLoans } from "@/services/loans";
-import { useAppSelector } from "@/app/hooks";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { store } from "@/app/store";
 
 export const api = axios.create({
   baseURL: "https://library-backend-production-b9cf.up.railway.app",

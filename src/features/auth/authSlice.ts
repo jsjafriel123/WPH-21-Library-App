@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { User, UserProfile, LoanStats } from "@/types/auth";
+import type { UserProfile, LoanStats } from "@/types/auth";
 
 interface AuthState {
   profile: UserProfile | null;
