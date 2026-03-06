@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useRef, Fragment } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { QUERY_KEYS } from "@/constants/queryKeys";
@@ -6,12 +6,10 @@ import { getCart } from "@/services/cart";
 import CartItem from "@/components/ui/CartItem";
 import DeleteItemButton from "@/components/ui/DeleteItemButton";
 import { Button } from "@/components/ui/button";
-import { borrowFromCart } from "@/services/cart";
-import { toast } from "sonner";
+
 export default function MyCart() {
   const [selectedBooks, setSelectedBooks] = useState<Set<number>>(new Set());
   const [searchParams] = useSearchParams();
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const hasHandledRef = useRef(false);
   const { data, isLoading } = useQuery({
@@ -46,32 +44,6 @@ export default function MyCart() {
     .filter((item: any) => selectedBooks.has(item.bookId))
     .map((item: any) => item.id);
 
-  const borrowMutation = useMutation({
-    mutationFn: borrowFromCart,
-
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.CART],
-      });
-
-      queryClient.invalidateQueries({
-        queryKey: ["loans"],
-      });
-
-      setSelectedBooks(new Set());
-
-      toast.success("Borrow process completed", {
-        description: data.data.message,
-      });
-    },
-
-    onError: (error: any) => {
-      toast.error("Borrow failed", {
-        description: error?.response?.data?.message || "Something went wrong",
-      });
-    },
-  });
-
   const toggleItem = (bookId: number) => {
     setSelectedBooks((prev) => {
       const newSet = new Set(prev);
@@ -102,19 +74,11 @@ export default function MyCart() {
     });
   };
 
-  const handleBorrowFromCart = async () => {
-    try {
-      borrowMutation.mutate({
-        itemIds: selectedItemIds,
-        days: 3,
-        borrowDate: new Date().toISOString().split("T")[0],
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  const handleBorrowFromCart = () => {
+    const ids = selectedItemIds.join(",");
+    navigate(`/checkout?items=${ids}`);
   };
-  // console.log("size:", selectedBooks.size, "legth:", items.length);
-  // console.log("selectedBooks:", selectedBooks);
+
   return (
     <section className="mt-[80px] flex max-h-[882px] w-[361px] flex-col gap-4 lg:mt-[128px] lg:max-h-[826px] lg:w-[1000px] lg:gap-8">
       <p className="text-display-xs lg:text-display-lg">
@@ -151,7 +115,6 @@ export default function MyCart() {
                     onChange={() => toggleItem(item.bookId)}
                     className="size-5"
                   />
-
                   <CartItem item={item} />
                   <DeleteItemButton
                     itemId={item.id}

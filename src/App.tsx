@@ -12,6 +12,7 @@ import Checkout from "./pages/Checkout";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { Toaster } from "sonner";
 import { useAuthRestore } from "./features/auth/useAuthRestore";
+import PostCheckout from "./pages/PostCheckout";
 
 function App() {
   useAuthRestore();
@@ -43,12 +44,21 @@ function App() {
           <Route
             path="/checkout"
             element={
-              // <ProtectedRoute>
-              <Checkout />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout/success"
+            element={
+              <ProtectedRoute>
+                <PostCheckout />
+              </ProtectedRoute>
             }
           />
         </Route>
+
         {/* Pages WITHOUT Header */}
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />

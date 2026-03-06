@@ -15,9 +15,14 @@ export const useCart = () => {
     return bookIdSet.has(bookId);
   };
 
+  const getCartItemById = (itemId: number) => {
+    return items.find((item: any) => item.id === itemId);
+  };
+
   return {
     cartItems: items,
     isBookInCart,
+    getCartItemById,
     isLoading,
   };
 };

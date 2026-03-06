@@ -2,7 +2,7 @@ import type { Book } from "@/features/books/booksApi";
 import LoanButtons from "../ui/LoanButtons";
 
 export default function DetailSection({ book }: { book: Book }) {
-  console.log(book);
+  // console.log(book);
   return (
     <section className="flex max-h-[940px] w-[361px] flex-col items-center gap-4 lg:h-[550px] lg:w-[1200px] lg:gap-6">
       <div className="h-7 w-full text-sm font-semibold tracking-[-2%]">
