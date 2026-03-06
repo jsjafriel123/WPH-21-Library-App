@@ -36,9 +36,13 @@ export default function Header() {
             >
               <div className="rounded-full lg:size-12">
                 <img
-                  src="/assets/image-Author.svg"
+                  src={
+                    profile?.profilePhoto
+                      ? profile?.profilePhoto
+                      : "/assets/image-Author.svg"
+                  }
                   alt={profile?.name}
-                  className="object-fill"
+                  className="rounded-full object-fill"
                 />
               </div>
               <p className="line-clamp-1 overflow-hidden overflow-ellipsis text-lg font-semibold tracking-[-2%]">
@@ -175,9 +179,13 @@ export default function Header() {
               className="size-10 rounded-full"
             >
               <img
-                src="/assets/image-Author.svg"
+                src={
+                  profile?.profilePhoto
+                    ? profile?.profilePhoto
+                    : "/assets/image-Author.svg"
+                }
                 alt={profile?.name}
-                className="object-fill"
+                className="rounded-full object-fill"
               />
             </button>
           </div>
