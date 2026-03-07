@@ -1,29 +1,24 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useMemo } from "react";
-import { getMyLoans } from "@/services/loans";
+import { useMyLoans } from "@/features/books/useMyLoans";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import dayjs from "dayjs";
-import { toast } from "sonner";
 import ReviewDialog from "./ReviewDialog";
+import useDebounce from "@/hooks/useDebounce";
+import { useAppSelector } from "@/app/hooks";
+
 export default function BorrowedTab() {
-  const [input, setInput] = useState("");
   const [status, setStatus] = useState("All");
-  // const { isHydrated } = useAppSelector((state) => state.auth);
+  const [search, setSearch] = useState("");
+  const { isHydrated } = useAppSelector((state) => state.auth);
+  const debouncedSearch = useDebounce(search, 400);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ["me", "loans"],
-      queryFn: getMyLoans,
-      initialPageParam: 1,
-      getNextPageParam: (lastPage) => {
-        const { page, totalPages } = lastPage.pagination;
-
-        return page < totalPages ? page + 1 : undefined;
-      },
-    });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useMyLoans(
+    debouncedSearch,
+    { enabled: isHydrated },
+  );
 
   useEffect(() => {
     if (!loadMoreRef.current || !hasNextPage) return;
@@ -52,25 +47,18 @@ export default function BorrowedTab() {
     }
   }, [data, status]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    toast.info(
-      `Seandainya waktuku cukup, pasti kucarikan kata kunci "${input}" ini untukmu...`,
-    );
-  };
-
   return (
     <section className="mt-6 flex max-h-[1089px] w-full flex-col gap-[15px] lg:max-h-[1040px] lg:w-[1000px] lg:gap-6">
       <p className="flex h-8 w-full text-display-xs font-bold text-neutral-950 lg:h-[38px] lg:text-display-sm lg:tracking-[-3%]">
         Borrowed List
       </p>
-      <form onSubmit={handleSubmit} className="relative size-auto">
+      <div className="relative size-auto">
         <Input
           id="search"
           type="search"
-          placeholder="Search"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+          placeholder="Search books"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           className="h-11 w-full gap-1.5 rounded-full border border-neutral-300 bg-white py-2 pl-10 pr-4 lg:w-[544px]"
         />
         <button
@@ -83,7 +71,7 @@ export default function BorrowedTab() {
             className="object-cover"
           />
         </button>
-      </form>
+      </div>
       <div className="flex h-10 w-full gap-2">
         <Button
           variant="outline"

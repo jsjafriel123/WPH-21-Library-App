@@ -11,4 +11,5 @@ export const QUERY_KEYS = {
   CART: ["cart"],
   CATEGORY: ["book-categories"],
   MY_REVIEWS: "my-reviews",
+  MY_LOANS: "my-loans",
 };
