@@ -60,7 +60,7 @@ export default function BorrowedTab() {
   };
 
   return (
-    <section className="min-h-70vh mt-6 flex max-h-[1089px] w-full flex-col gap-[15px] lg:max-h-[1040px] lg:w-[1000px] lg:gap-6">
+    <section className="mt-6 flex max-h-[1089px] w-full flex-col gap-[15px] lg:max-h-[1040px] lg:w-[1000px] lg:gap-6">
       <p className="flex h-8 w-full text-display-xs font-bold text-neutral-950 lg:h-[38px] lg:text-display-sm lg:tracking-[-3%]">
         Borrowed List
       </p>

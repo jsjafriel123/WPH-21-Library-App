@@ -16,12 +16,12 @@ export default function UserPage() {
   };
 
   return (
-    <section className="mt-[80px] flex max-h-[1160px] w-[393px] justify-center lg:mt-[120px] lg:max-h-[1322px] lg:w-[1000px]">
+    <section className="mt-[80px] flex max-h-[1360px] w-[393px] justify-center lg:mt-[120px] lg:max-h-[1322px] lg:w-[1000px]">
       <Tabs
         defaultValue="profile"
         value={tab}
         onValueChange={handleTabChange}
-        className="w-full gap-[15px]"
+        className="w-full"
       >
         <div className="w-full rounded-2xl bg-neutral-100 lg:w-[557px]">
           <TabsList className="grid h-[56px] w-full grid-cols-3 p-2 lg:w-[557px]">
