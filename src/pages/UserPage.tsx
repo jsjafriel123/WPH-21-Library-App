@@ -16,7 +16,7 @@ export default function UserPage() {
   };
 
   return (
-    <section className="mt-[80px] flex max-h-[1160px] w-[361px] justify-normal lg:mt-[120px] lg:max-h-[1322px] lg:w-[1000px]">
+    <section className="mt-[80px] flex max-h-[1160px] w-[393px] justify-center lg:mt-[120px] lg:max-h-[1322px] lg:w-[1000px]">
       <Tabs
         defaultValue="profile"
         value={tab}
@@ -46,11 +46,11 @@ export default function UserPage() {
           <ProfileTab />
         </TabsContent>
 
-        <TabsContent value="loans">
+        <TabsContent value="loans" className="flex justify-center">
           <BorrowedTab />
         </TabsContent>
 
-        <TabsContent value="reviews">
+        <TabsContent value="reviews" className="flex justify-center">
           <ReviewsTab />
         </TabsContent>
       </Tabs>

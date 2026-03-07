@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { toast } from "sonner";
+import ReviewDialog from "./ReviewDialog";
 export default function BorrowedTab() {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState("All");
@@ -40,8 +41,6 @@ export default function BorrowedTab() {
 
   const filteredData = useMemo(() => {
     const allLoans = data?.pages.flatMap((page) => page.loans) || [];
-    console.log("flat Loans:", allLoans);
-    console.log("status:", status);
 
     if (status === "All") {
       return allLoans;
@@ -59,10 +58,9 @@ export default function BorrowedTab() {
       `Seandainya waktuku cukup, pasti kucarikan kata kunci "${input}" ini untukmu...`,
     );
   };
-  console.log("filtered Loans:", filteredData);
 
   return (
-    <section className="min-h-70vh mt-6 flex max-h-[1089px] w-[361px] flex-col gap-[15px] lg:max-h-[1040px] lg:w-[1000px] lg:gap-6">
+    <section className="min-h-70vh mt-6 flex max-h-[1089px] w-full flex-col gap-[15px] lg:max-h-[1040px] lg:w-[1000px] lg:gap-6">
       <p className="flex h-8 w-full text-display-xs font-bold text-neutral-950 lg:h-[38px] lg:text-display-sm lg:tracking-[-3%]">
         Borrowed List
       </p>
@@ -116,7 +114,7 @@ export default function BorrowedTab() {
           Overdue
         </Button>
       </div>
-      <div className="flex max-h-[913px] w-full flex-col gap-[15px] overflow-y-auto p-0 lg:max-h-[782px] lg:w-[1000px] lg:gap-4 lg:p-3">
+      <div className="flex max-h-[913px] w-full flex-col gap-[15px] overflow-y-auto p-3 lg:max-h-[782px] lg:w-[1000px] lg:gap-4 lg:p-3">
         {filteredData?.map((loan: any) => (
           <div
             key={loan.id}
@@ -169,12 +167,13 @@ export default function BorrowedTab() {
                   </div>
                 </div>
               </div>
-              <Button
+              {/* <Button
                 onClick={() => toast.info("Maaf belum sempat dibuat coach...")}
                 className="h-10 w-full gap-2 rounded-[100px] bg-primary-300 p-2 text-md font-bold tracking-[-2%] text-neutral-25 lg:w-[182px]"
               >
                 Give Review
-              </Button>
+              </Button> */}
+              <ReviewDialog bookId={loan.book.id} />
             </div>
           </div>
         ))}

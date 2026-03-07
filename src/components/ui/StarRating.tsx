@@ -4,7 +4,7 @@ export default function StarRating({ rating }: { rating: number }) {
   const fullStars = Math.floor(rating);
 
   return (
-    <div className="flex gap-1">
+    <div className="flex h-6 gap-0.5">
       {[...Array(5)].map((_, index) => (
         <Star
           key={index}

@@ -42,7 +42,7 @@ export default function Header() {
                       : "/assets/image-Author.svg"
                   }
                   alt={profile?.name}
-                  className="rounded-full object-fill"
+                  className="size-10 rounded-full object-fill"
                 />
               </div>
               <p className="line-clamp-1 overflow-hidden overflow-ellipsis text-lg font-semibold tracking-[-2%]">
@@ -185,7 +185,7 @@ export default function Header() {
                     : "/assets/image-Author.svg"
                 }
                 alt={profile?.name}
-                className="rounded-full object-fill"
+                className="size-10 rounded-full object-fill"
               />
             </button>
           </div>
